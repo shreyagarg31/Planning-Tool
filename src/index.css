@@ -1,0 +1,213 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.top {
+  text-align: center;
+}
+
+.container {
+	max-width: 960px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 15px;
+	padding-left: 15px;
+	min-height: 100vh;
+}
+
+.bucket-container {
+  max-width: 900px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 15px;
+	padding-left: 15px;
+	min-height: 100vh;
+  padding : 0;
+  background: #ccf;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bucket {
+  /* background-color: lightsalmon;
+  border-radius: 10px;
+	padding: 1rem;
+	min-height: 90px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	white-space: pre-wrap; */
+  display: flex;
+  background-color: lightsalmon;
+  padding: 10px 20px;
+  color: darkred;
+  margin: 5px 0;
+  white-space: pre-wrap;
+  transition: .5s;
+}
+
+.bucket:hover {
+  transform: scale(1.06);
+  background-color: indianred;
+}
+
+.bucket-list {
+  /* border-radius: 10px;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  height: 5em;
+  width : 30em;
+  transition: 300ms; */
+  position: relative;
+  width : 450 px;
+  margin : 100px auto 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.notes-list {
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-columns: repeat(
+		auto-fill,
+		minmax(250px, 1fr)
+	);
+}
+
+.note {
+	background-color: #fef68a;
+	border-radius: 10px;
+	padding: 1rem;
+	min-height: 170px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	white-space: pre-wrap;
+  transition: transform .15s linear;
+}
+
+.note:hover,.note:focus{
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  transform: scale(1.25);
+  position:relative;
+  z-index:5;
+}
+
+.note:nth-child(even) a{
+  position:relative;
+  top:5px;
+  background:#cfc;
+}
+.note:nth-child(3n) a{
+  position:relative;
+  top:-5px;
+  background:#ccf;
+}
+
+.note__description {
+  flex-grow: 1;
+  font-size: 1rem;
+}
+
+.note-footer {
+	display: flex;
+	align-items: right;
+	justify-content: space-between;
+}
+
+.bucket-footer {
+  display: flex;
+  position: relative;
+  left : 700px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.delete-icon {
+	cursor: pointer;
+}
+
+form.create-bucket {
+  position: relative;
+  max-width: 400px;
+  margin: 30px auto 20px auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 7px;
+  box-shadow: 0 1px 5px rgb(138, 137, 137);
+}
+
+form.create-bucket input {
+  width: 50%;
+  border: none;
+  padding: 4px;
+  outline: none;
+  font-size: 1.2em;
+  font-family: inherit;
+  resize: none;
+}
+
+form.create-bucket button {
+  position: absolute;
+  right: 18px;
+  bottom: -18px;
+  background: #fc4a1a;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  outline: none;
+}
+
+
+form.create-note {
+  position: relative;
+  max-width: 480px;
+  margin: 30px auto 20px auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 7px;
+  box-shadow: 0 1px 5px rgb(138, 137, 137);
+}
+form.create-note input,
+form.create-note textarea {
+  width: 100%;
+  border: none;
+  padding: 4px;
+  outline: none;
+  font-size: 1.2em;
+  font-family: inherit;
+  resize: none;
+}
+form.create-note button {
+  position: absolute;
+  right: 18px;
+  bottom: -18px;
+  background: #fc4a1a;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  outline: none;
+}

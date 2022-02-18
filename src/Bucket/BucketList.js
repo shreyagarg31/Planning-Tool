@@ -3,19 +3,27 @@ import Buckets from './Buckets';
 import { useState, useEffect } from "react";
 import CreateBucket from "./CreateBucket";
 import Top from './Top';
+import _ from "lodash";
+import { DragDropContext } from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
+import StickyNotesList from "../components/StickyNotesList";
 
 const BucketList = () => {
     const [bucketList , setBucketList] = useState([{
         bucketId : nanoid() ,
-        bucketName : "Goals" 
+        bucketName : "Goals" ,
+        groupedNotes : [] ,
     },
     {
         bucketId : nanoid(),
-        bucketName : "Meets"
+        bucketName : "Meets",
+        groupedNotes : [] ,
     },
     {
         bucketId : nanoid(),
-        bucketName : "Maths"
+        bucketName : "Maths",
+        groupedNotes : [] ,
     },
 ])
 
@@ -33,9 +41,22 @@ useEffect(() => {
     if (savedBuckets) {
       setBucketList(savedBuckets);
     }
+    bucketList.forEach((element , index) => {
+      element.groupedNotes.push(savedNotes.filter( function (note){
+        //console.log(note.bucketName + " " + element.bucketName);
+        return note.bucketName === element.bucketName;
+      }))
+    });
+
+    localStorage.setItem(
+      'react-notes-bucket-data',
+      JSON.stringify(bucketList)
+    );
+
   }, []);
 
   useEffect(() => {
+    console.log(bucketList);
     localStorage.setItem(
       'react-notes-bucket-data',
       JSON.stringify(bucketList)
@@ -59,20 +80,32 @@ useEffect(() => {
     });
   }
 
-  function listNotes(bucketId) {
-    const savedNotes = JSON.parse(
-      localStorage.getItem('react-notes-app-data')
-    );
+  const handleDragEnd = ({destination , source}) => {
+    // console.log("from" + source.index);
+    // console.log("to" + destination.index);
+      if(!destination)return ;
 
-    // return savedNotes.filter(function (note) {
-    //   return note.bucketId === bucketId;
-    // });
+      if(destination.index === source.index && destination.droppableId === source.droppableId){
+        return;
+      }
+
+      const itemCopy = {...bucketList[source.droppableId].groupedNotes[source.index]};
+      console.log(itemCopy);
+      setBucketList( prev => {
+        prev = {...prev}
+        //Remove prev elements from source
+        prev[source.droppableId].groupedNotes.splice(source.index, 1)
+        
+        //Add new elements to destination location
+        prev[destination.droppableId].groupedNotes.splice(destination.index , 0 , itemCopy);
+        return prev
+      })
   }
 
   return <div> 
       <Top />
       <CreateBucket onCreate={addBucket} notes={savedNotes}/>
-      <div className="bucket-container">
+      {/* <div className="bucket-container">
         <div className="bucket-list">
           {
               bucketList.map((buckets) => 
@@ -82,6 +115,56 @@ useEffect(() => {
               showNotes = {listNotes}/>)
           }
       </div>
+      </div> */}
+      <div className="group">
+      <DragDropContext onDragEnd={handleDragEnd}>
+        {_.map(bucketList , (data,key) => {
+          return (
+            <div key = {data.bucketId} className="column">
+              <h3>{data.bucketName}</h3>
+              <Droppable droppableId={key}>
+                {(provided) => {
+                  return (
+                    <div 
+                    ref={provided.innerRef}
+                     {...provided.droppableProps}
+                     className={"droppable-col"}
+                    >
+                      {
+                        data.groupedNotes.map((el , index) => {
+                          //console.log("Hey -->" + el[index]);
+                          return (
+                            el === undefined || el[index]=== undefined?<div></div>:
+                            <Draggable key={el[index].id} index={index} draggableId={el[index].id}>
+                              {(provided) => {
+                                return (
+                                  <div className={"item"}
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  >
+                                    {el[index].title}
+                                  </div>
+                                )
+                              }
+
+                              }
+                            </Draggable>
+                          )
+                        })
+                      }
+                      {provided.placeholder}
+                    </div>
+                  )
+                }
+
+                }
+              </Droppable>
+            </div>
+          )
+        })}
+
+      </DragDropContext>
       </div>
   </div>
 

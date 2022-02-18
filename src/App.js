@@ -11,33 +11,34 @@ const App = () => {
     title : "Flowers",
     text : "Flowers are beautiful. I love them.",
     author : "user1" ,
-    bucketId : ""
+    bucketName : "Goals"
 },
 {
     id : nanoid() ,
     title: "Present" ,
     text : "Today was a great day.",
     author : "user2" ,
-    bucketId : ""
+    bucketName : ""
 },
 {
     id : nanoid() ,
     title: "War",
     text : "War can destroy the whole mankind. We should support peace.",
     author : "shreya",
-    bucketId : ""
+    bucketName : "Maths"
 },
 {
     id : nanoid() ,
     title: "Services",
     text : "Server guests , call planners, total transport",
     author : "Rita",
-    bucketId : ""
+    bucketName : "Meets"
 },
 ])
 
 
 useEffect(() => {
+  //localStorage.clear();
   const savedNotes = JSON.parse(
     localStorage.getItem('react-notes-app-data')
   );
@@ -69,34 +70,34 @@ function deleteNote(deleteId) {
   });
 }
 
-function onEdit(noteTitle , noteDescription , noteAuthor , id) {
-  console.log(noteTitle);
-  const tempNotes = [...noteList];
+// function onEdit(noteTitle , noteDescription , noteAuthor , id) {
+//   console.log(noteTitle);
+//   const tempNotes = [...noteList];
 
-  const index = tempNotes.findIndex((item) => item.id === id);
-  if (index < 0) return;
+//   const index = tempNotes.findIndex((item) => item.id === id);
+//   if (index < 0) return;
 
-  tempNotes[index].text = noteDescription;
-  tempNotes[index].title = noteTitle;
-  tempNotes[index].author = noteAuthor;
-  setNoteList(tempNotes);
-}
+//   tempNotes[index].text = noteDescription;
+//   tempNotes[index].title = noteTitle;
+//   tempNotes[index].author = noteAuthor;
+//   setNoteList(tempNotes);
+// }
 
-function editNote(props) {
-  console.log(props);
-  const tempNotes = [...noteList];
+// function editNote(props) {
+//   console.log(props);
+//   const tempNotes = [...noteList];
 
-    // const index = tempNotes.findIndex((item) => item.id === noteId);
-    // if (index < 0) return;
+//     // const index = tempNotes.findIndex((item) => item.id === noteId);
+//     // if (index < 0) return;
 
-    // return <EditNote id = {noteId} 
-    // title = {tempNotes[index].title} 
-    // text = {tempNotes[index].text}
-    // author = {tempNotes[index].author} 
-    // onEditNote = {onEdit} />
-    return <div>yo</div>
+//     // return <EditNote id = {noteId} 
+//     // title = {tempNotes[index].title} 
+//     // text = {tempNotes[index].text}
+//     // author = {tempNotes[index].author} 
+//     // onEditNote = {onEdit} />
+//     return <div>yo</div>
   
-}
+// }
 
 
   return <div>
@@ -106,7 +107,7 @@ function editNote(props) {
       <StickyNotesList
       notes = {noteList} 
       handleDeleteNote = {deleteNote}
-      handleEditNote = {editNote}
+      // handleEditNote = {editNote}
       />
     </div>
   </div>

@@ -12,7 +12,7 @@ import StickyNotesList from "../components/StickyNotesList";
 const BucketList = () => {
     const [bucketList , setBucketList] = useState([{
         bucketId : nanoid() ,
-        bucketName : "Goals" ,
+        bucketName : "Life" ,
         groupedNotes : [] ,
     },
     {
@@ -22,7 +22,7 @@ const BucketList = () => {
     },
     {
         bucketId : nanoid(),
-        bucketName : "Maths",
+        bucketName : "Peace",
         groupedNotes : [] ,
     },
 ])
@@ -43,8 +43,9 @@ useEffect(() => {
     }
     bucketList.forEach((element , index) => {
       element.groupedNotes.push(savedNotes.filter( function (note){
-        //console.log(note.bucketName + " " + element.bucketName);
-        return note.bucketName === element.bucketName;
+        console.log(note.bucketName + " " + element.bucketName);
+        //console.log(note.bucketName.includes(element.bucketName));
+        return note.bucketName.includes(element.bucketName);
       }))
     });
 
@@ -52,11 +53,13 @@ useEffect(() => {
       'react-notes-bucket-data',
       JSON.stringify(bucketList)
     );
+    //console.log(bucketList);
+    setBucketList(bucketList);
 
   }, []);
 
   useEffect(() => {
-    console.log(bucketList);
+    //console.log(bucketList);
     localStorage.setItem(
       'react-notes-bucket-data',
       JSON.stringify(bucketList)

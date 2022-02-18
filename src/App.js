@@ -11,28 +11,28 @@ const App = () => {
     title : "Flowers",
     text : "Flowers are beautiful. I love them.",
     author : "user1" ,
-    bucketName : "Goals"
+    bucketName : "Life"
 },
 {
     id : nanoid() ,
-    title: "Present" ,
-    text : "Today was a great day.",
+    title: "Chocolates" ,
+    text : "These are the best friends in anxiety.",
     author : "user2" ,
-    bucketName : ""
+    bucketName : "Life"
 },
 {
     id : nanoid() ,
     title: "War",
     text : "War can destroy the whole mankind. We should support peace.",
     author : "shreya",
-    bucketName : "Maths"
+    bucketName : "Peace"
 },
 {
     id : nanoid() ,
     title: "Services",
     text : "Server guests , call planners, total transport",
     author : "Rita",
-    bucketName : "Meets"
+    bucketName : ""
 },
 ])
 
